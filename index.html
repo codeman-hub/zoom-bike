@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zoom Bike</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+ .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width:100%;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: bold;
+  }
+  .navbar-brand {
+    margin-left: 20px; /* Adjust this for right alignment */
+  }
+  .navbar-nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adds spacing between nav items */
+    width: 100%;
+  }
+
+  #book-bike a {
+  background-color: #28a745; /* Green color */
+  padding: 10px 20px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  display: inline-block;
+  margin-left: 30px;
+  
+}
+
+/* On hover, change background color */
+#book-bike a:hover {
+  background-color: #000000; /* Darker green */
+}
+
+  .custom-btn {
+    background-color: #00dd1d; /* Change to your preferred color */
+    color: rgb(0, 0, 0);
+    padding: 8px 16px;
+    border: none;
+  }
+  .custom-btn img {
+    margin-right: 10px;
+  }
+  .container-fluid {
+    max-width: 90%; /* Prevents excessive stretching */
+  }
+
+    .carousel-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 70%;
+}
+
+
+.carousel-caption h5 {
+  font-size: 1.8rem; /* Adjust the size as needed */
+  font-weight: bold;
+}
+
+.carousel-caption h4 {
+  font-size: 1.6rem;
+  font-weight: bold; /* Adjust the size as needed */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Adjust transparency here */
+}
+.booking-form {
+    position: absolute;
+    top: 98%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .form-control{
+    height: 40px;;
+  }
+  .available-bikes {
+  margin-top: 130px;
+  width: 100%;
+  padding: 40px 20px;
+  background-color: #ffe6e6; /* Light Pink Background */
+  text-align: center;
+  height: 750px;
+}
+
+.available-bikes h2{
+  margin-top: 80px;
+}
+
+.bike-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px;
+  margin-top: 100px;
+}
+
+.bike-card {
+  position: relative;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bike-img {
+  width: 250px; /* Adjust the size as needed */
+  height: 150px;
+  border-radius: 10%; /* Fully rounded */
+  object-fit: cover;
+  position: absolute;
+  top: -50px; /* Overlaps price & buttons */
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.bike-card:hover {
+  box-shadow: 0 0 50px rgba(255, 255, 0, 0.7);/* Yellow Shadow on Hover */
+  transform: translateY(-10px);
+}
+
+.bike-details {
+  width: 100%;
+  background: #fff;
+  padding: 50px 15px 15px; /* Extra padding for image overlap */
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 50px; /* Push it down due to absolute positioning */
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.btn {
+  margin: 5px;
+}
+
+.about-us-section {
+  background-color: #f8f9fa; /* Light gray background */
+  padding: 100px 0;
+}
+
+.about-us {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px; /* Reduce space between left and right sides */
+  max-width: 85%;
+  margin: auto;
+}
+.about-img {
+  width: 100%;
+  max-width: 500px; /* Adjust max image width */
+  border-radius: 10px;
+}
+
+.btn-success:hover {
+  background-color: #000000;
+  transform: scale(1.05);
+}
+
+/* Why Choose Us Section */
+.why-choose-us-section {
+  text-align: center;
+  padding: 60px 0;
+  background-color: #fef4f4; /* Light pink background */
+}
+
+.small-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff5733; /* Highlighted text */
+}
+
+.main-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Features Container */
+/* Why Choose Us Section */
+.why-choose-us-section {
+  text-align: center;
+  padding: 60px 0;
+  background: url("139266-headlamp-tree-automotive_lighting-morning-sunlight-5513x3683.jpg") no-repeat center center/cover;
+  color: white;
+  position: relative;
+  height: 650px;
+}
+
+/* Overlay for better text visibility */
+.why-choose-us-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay */
+  z-index: 1;
+}
+
+.why-choose-us-section * {
+  position: relative;
+  z-index: 2;
+}
+
+.small-title {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffeb3b; /* Yellow highlight */
+}
+
+.main-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+/* Features Container */
+.features-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Feature Card Styling */
+.feature-card {
+  background-color: rgba(255, 255, 255, 0.999);
+  color: #000000;
+  padding: 30px;
+  border-radius: 15px;
+  width: 300px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  position: relative;
+}
+
+/* Offset Effect */
+.feature-card.up {
+  transform: translateY(-10px);
+  width: 250px;
+  height: 300px;
+}
+
+.feature-card.down {
+  transform: translateY(10px);
+  width: 250px;
+  height: 300px;
+}
+
+/* Emoji Styling */
+.emoji {
+  font-size: 40px;
+  margin-bottom: 15px;
+  display: inline-block;
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Hover Effects */
+.feature-card:hover {
+  transform: translateY(-20px); /* Move up */
+  
+}
+
+.feature-card:hover .emoji {
+  transform: rotateY(360deg); /* Horizontal Rotation */
+}
+
+/* Stats Container */
+.stats-container {
+  position: absolute;
+    margin-top: 140px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.993);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: rgb(0, 0, 0);
+}
+
+/* Emoji Circle */
+.stat-emoji {
+  width: 120px;
+  height: 120px;
+  background-color: rgba(0, 164, 30, 0.634);
+  border-radius: 50%; /* Fully Rounded Emoji */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 55px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  margin: 0 auto 10px; /* Center and add space below */
+}
+
+/* Hover Effect */
+
+
+/* Stat Text */
+.stat-text {
+  font-size: 40px;
+  font-weight: bold;  
+}
+
+.stat-description {
+  font-size: 20px;
+  color: #000000;
+}
+
+.how-to-use-section {
+  background: url("abstract-background-modern-tile-wall-3d-rendering_118019-399.avif") no-repeat center center/cover;
+  padding: 80px 0;
+  color: #fff;
+  margin-top: 150px;
+  height: 900px;
+}
+
+/* Centering both columns */
+.container {
+  display: flex;
+  justify-content: center;
+  
+}
+
+/* Adjust column spacing */
+.use {
+ margin-top: 230px;
+}
+
+/* Left Side */
+.section-title {
+  font-weight: bold;
+  text-align: center;
+}
+
+.section-subtitle {
+  width: 100%;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.how-to-use-img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Steps Container */
+.steps-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+}
+
+/* Each Step */
+.step {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  width: 80%; /* Reduce width */
+  height: 150px; /* Increase height */
+  padding: 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.step:nth-child(2) {
+  margin-left: 30px; /* Adjust this value as needed */
+}
+/* Step Icon */
+.step-icon {
+  width: 100px;
+  height: 90px;
+  background: #336820;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  margin-right: 15px;
+}
+
+/* Step Text */
+.step-text h4 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #000000;
+}
+
+.step-text p {
+  font-size: 14px;
+  color: #000000;
+}
+
+/* Booking Section */
+.booking-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10%;
+  
+  color: #000000;
+  background-color: #00831ee4;
+  height: 350px;
+}
+
+.booking-content {
+ width: 60%;
+}
+
+.booking-content h2 {
+  font-size: 50px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.booking-content p {
+  font-size: 16px;
+  color: #ffffff;
+  text-shadow: #000000;
+}
+
+.booking-action {
+  text-align: right;
+}
+
+.booking-action h3 {
+  font-size: 32px;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+
+.booking-action .btn {
+  font-size: 22px;
+  padding: 10px 20px;
+  background-color: #000000bc;
+}
+
+/* Footer Section */
+.footer-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #222;
+  color: #fff;
+  padding: 40px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.footer-content {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+/* Footer Links & Contact Info */
+.footer-links, .footer-contact {
+  width: 25%;
+  min-width: 200px;
+  text-align: center;
+}
+
+.footer-links h4, .footer-contact h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 5px;
+}
+
+.footer-links ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-links ul li a:hover {
+  text-decoration: underline;
+}
+
+.footer-contact p {
+  margin-bottom: 5px;
+}
+
+/* Footer Bottom Bar - Full Width, No Space */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px; /* Ensures equal height for both sections */
+  margin: 0;
+}
+
+/* Left Side: Copyright */
+.footer-bottom .copyright {
+  background: black;
+  color: white;
+  padding: 25px 20px;
+  width: 50%;
+  text-align: left;
+  display: flex;
+  align-items: center;
+}
+
+/* Right Side: Social Media */
+.footer-bottom .social-media {
+  background: rgb(3, 101, 0);
+  padding: 37px 20px;
+  width: 50%;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+@media (max-width: 768px) {
+ *body{
+  width: 100%;
+ }
+
+
+  #carouselExampleCaptions .carousel-inner {
+    height: auto; /* Adjust the height for smaller screens */
+    
+  }
+
+  #carouselExampleCaptions .carousel-item img {
+    object-fit: cover; /* Ensure images cover the container without distorting */
+    height: 500px; /* Fill the carousel's height */
+    width:100%;
+  }
+
+  .carousel-caption h4, .carousel-caption h5 {
+    font-size: 1.2rem; /* Smaller font size for headings */
+    text-align: center; /* Center the text for better presentation */
+    
+  }
+
+  .carousel-caption {
+   position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center the caption vertically and horizontally */
+    padding: 10px; /* Add padding to avoid text touching edges */
+    text-align: center; /* Center the text */
+  }
+
+  .carousel-caption .btn {
+    font-size: 0.9rem; /* Adjust button size */
+    padding: 8px 16px; /* Reduce button padding for smaller screens */
+    margin: 5px; /* Add spacing between buttons */
+  }
+
+  .carousel-indicators {
+    bottom: 10px; /* Move the indicators closer to the bottom */
+  }
+
+  .booking-form {
+    position:relative;
+    margin-top: 80px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    max-width: 1200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+   
+  }
+
+  .booking-form h5 {
+    font-size: 1.2rem; /* Adjust font size for headings */
+    margin-bottom: 20px; /* Increase space below the heading */
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .col-3 {
+    width: 100%; /* Stack input fields vertically */
+    margin-bottom: 15px; /* Add spacing between fields */
+  }
+
+  .col-2 {
+    width: 48%; /* Make the columns 48% width for better spacing */
+    margin-bottom: 15px; /* Add spacing between fields */
+  }
+
+  .form-label {
+    font-size: 0.9rem; /* Smaller font size for labels */
+  }
+
+  .form-control {
+    height: 35px; /* Slightly smaller input height */
+    font-size: 0.9rem; /* Adjust input text size */
+  }
+
+  .form-check-label {
+    font-size: 0.9rem; /* Adjust radio button label size */
+  }
+
+  .btn {
+    font-size: 0.9rem; /* Adjust button text size */
+    padding: 10px 20px; /* Adjust button padding */
+  }
+
+  .d-flex {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .d-flex.align-items-end {
+    justify-content: flex-start;
+  }
+
+  .d-flex.align-items-end button {
+    width: 100%; /* Make the button full width on mobile */
+  }
+
+  .available-bikes {
+  margin-top: -300px;
+  padding: 40px 20px;
+  text-align: center;
+  height: auto;
+  }
+
+  .available-bikes h2 {
+    margin-top: 2px;
+    font-size: 1.5rem; /* Adjust font size for smaller screens */
+    margin-bottom: 20px; /* Increase space below heading */
+  }
+
+  .available-bikes h1 {
+    font-size: 1.2rem; /* Reduce size of the subheading */
+    margin-bottom: 20px; /* Adjust bottom margin */
+    width: 100%; /* Ensure the subheading takes full width */
+  }
+
+  .bike-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .bike-card {
+    width: 80%; /* Reduce the width of each bike card to fit two per row */
+    margin-bottom: 40px; /* Add margin between cards */
+    border-radius: 8px;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .bike-img {
+    width: 80%;
+    height: 50%;
+    border-radius: 8px;
+  }
+
+  .bike-details {
+    text-align: center;
+  }
+
+  .bike-details h5 {
+    font-size: 1.1rem; /* Adjust heading font size */
+    margin: 0;
+  }
+
+  .bike-details .price {
+    font-size: 1rem;
+   
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    width: 100%; /* Make buttons full-width for easier tapping */
+    padding: 10px;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+
+  .btn-call {
+    border: 2px solid #28a745;
+  }
+
+  .btn-book {
+    
+    border: 2px solid #28a745;
+  }
+  .about-img {
+  margin-top: -50px;
+}
+  .why-choose-us-section {
+    height: auto;
+   }
+
+  .features-container {
+   gap: 10px; 
+   flex-direction: column;
+   align-items: center;
+  
+}
+.feature-card{
+  transition: none;
+}
+.feature-card.up{
+  height: 250px;
+  width: 400px;
+  padding: 10px;
+  transform: none;
+}
+
+.feature-card.down{
+  height: 250px;
+  width: 400px;
+  padding: 10px;
+  transform: none;
+}
+.stats-container{
+  z-index: 10;
+  margin-top: 270px;
+  width: 90%;
+  border-radius: 20px;
+ 
+}
+.how-to-use-section{
+  margin-top: 450px;
+  flex-direction: column;
+}
+.use{
+  margin-top: 50px;
+}
+}
+    </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
+    <div class="container-fluid">
+      <!-- Logo -->
+      <a class="navbar-brand" href="#">
+        <img src="https://zoombike.softnue.in/assets/img/logo/logo.webp" alt="Logo" height="50">
+      </a>
+  
+      <!-- Navbar toggler (for mobile) -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" 
+        aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Navbar items -->
+      <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active fw-bold" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="#">Rental Terms And Conditions</a>
+          </li>
+          <li class="nav-item" id="book-bike">
+            <a class="nav-link fw-bold text-white" href="#">
+              🚲 Book a Bike
+            </a>
+          </li>
+        </ul>
+      </div>
+  
+  </nav>
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" style="height: 700px;" >
+      <div class="carousel-item active" data-bs-interval="3000">
+        <img src="pexels-giorgio-de-angelis-482403-1413412.jpg" class="d-block w-100 " alt="...">
+        <div class="overlay"></div>
+        <div class="carousel-caption">
+          <h4>WELCOME TO ZOOM BIKE</h4>
+          <h5>READY FOR AN ADVENTURE? RENT A BIKE AND EXPLORE GUWAHATI AND ASSAM WITH ZOOMBIKE!</h5>
+          <div class="mt-3">
+            <button class="btn btn-success btn-lg rounded-pill me-2">Rent Now</button>
+            <button class="btn btn-outline-light btn-lg rounded-pill">Call Now</button>
+          </div>          
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="pexels-rahul-11574819.jpg" class="d-block w-100" alt="...">
+        <div class="overlay"></div>
+        <div class="carousel-caption ">
+          <h4>WELCOME TO ZOOM BIKE</h4>
+          <h5>EXPLORE YOUR CITY: ZOOMBIKE'S SELF-RIDE RENTALS MAKE IT EASY AND FUN!</h5>
+          <div class="mt-3">
+            <button class="btn btn-success btn-lg rounded-pill me-2">Rent Now</button>
+            <button class="btn btn-outline-light btn-lg rounded-pill">Call Now</button>
+          </div>          
+        </div>
+      </div>
+      <div class="carousel-item" data-bs-interval="3000">
+        <img src="pexels-romanp-34006.jpg" class="d-block w-100" alt="...">
+        <div class="overlay"></div>
+        <div class="carousel-caption ">
+          <h4>WELCOME TO ZOOM BIKE</h4>
+          <h5>EXPERIENCE THE OPEN ROAD: ZOOMBIKE OFFERS EASY, AFFORDABLE BIKE RENTALS!</h5>
+          <div class="mt-3">
+            <button class="btn btn-success btn-lg rounded-pill me-2">Rent Now</button>
+            <button class="btn btn-outline-light btn-lg rounded-pill">Call Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- Booking Form -->
+  <div class="booking-form bg-white shadow rounded">
+    <h5 class="text-center mb-3">
+      Book Your Ride(Mandatory Documents: Original Driving Licence and Aadhar Card)
+    </h5>
+    <form>
+      <div class="row">
+        <div class="col-3 mb-2">
+          <label class="form-label fw-bold">Name</label>
+          <input type="text" class="form-control" style="height: 40px;" required>
+        </div>
+        <div class="col-3 mb-2">
+          <label class="form-label fw-bold">Phone</label>
+          <input type="tel" class="form-control" style="height: 40px;" required>
+        </div>
+        <div class="col-3 mb-2">
+          <label class="form-label fw-bold">Destination</label>
+          <input type="text" class="form-control" style="height: 40px;" required>
+        </div>
+        <div class="col-3 mb-2">
+          <label class="form-label fw-bold">Bike Model</label>
+          <select class="form-control" style="height: 40px;" required>
+            <option selected disabled>Select</option>
+            <option>Royal Enfield Classic 350</option>
+            <option>Honda Activa</option>
+            <option>Yamaha R15</option>
+            <option>TVS Apache</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-2 mb-2">
+          <label class="form-label fw-bold">Pick-Up Date</label>
+          <input type="date" class="form-control" required>
+        </div>
+        <div class="col-2 mb-2">
+          <label class="form-label fw-bold">Drop Date</label>
+          <input type="date" class="form-control"  required>
+        </div>
+        <div class="col-2 mb-2">
+          <label class="form-label fw-bold">Pick-Up Time</label>
+          <input type="time" class="form-control" required>
+        </div>
+        <div class="col-2 mb-2">
+          <label class="form-label fw-bold">Drop Time</label>
+          <input type="time" class="form-control" required>
+        </div>
+        <div class="col-2 mb-2">
+          <label class="form-label fw-bold">Are you 18+?</label>
+          <div class="d-flex">
+            <div class="form-check me-2">
+              <input class="form-check-input" type="radio" name="age" value="yes" required>
+              <label class="form-check-label fw-bold">Yes</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="age" value="no" required>
+              <label class="form-check-label fw-bold">No</label>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 d-flex align-items-end justify-content-end">
+          <button type="submit" class="btn btn-success rounded-pill px-3">Book Bike</button>
+        </div>
+      </div>
+    </form>
+  </div>
+ 
+ <!-- Available Bikes Section (Full Width, Light Pink Background) -->
+ <div class="available-bikes">
+  <h2 class="text-center mb-4 fw-bold">Available Bikes</h2>
+  <h1 class="text-center mb-5 w-75 mx-auto fw-bold">Secure your Ride now and Book your Bike for an Adventure-filled Experience!</h1>
+  <div class="bike-list">
+    
+    <div class="bike-card">
+      <img src="classic35066d56de6e0911.avif" alt="Royal Enfield" class="bike-img">
+      <div class="bike-details">
+        <h5>Royal Enfield Classic</h5>
+        <p class="price">₹1200/day</p>
+        <button class="btn btn-outline-success btn-call">Call Now</button>
+        <button class="btn btn-success btn-book">Book Now</button>
+      </div>
+    </div>
+
+    <div class="bike-card">
+      <img src="activa-6g65e80a97062a4.avif" alt="Honda Activa" class="bike-img">
+      <div class="bike-details">
+        <h5>Honda Activa</h5>
+        <p class="price">₹600/day</p>
+        <button class="btn btn-outline-success btn-call">Call Now</button>
+        <button class="btn btn-success btn-book">Book Now</button>
+      </div>
+    </div>
+
+    <div class="bike-card">
+      <img src="r15-v466e542ff739d8.avif" alt="Yamaha R15" class="bike-img">
+      <div class="bike-details">
+        <h5>Yamaha R15</h5>
+        <p class="price">₹900/day</p>
+        <button class="btn btn-outline-success btn-call">Call Now</button>
+        <button class="btn btn-success btn-book">Book Now</button>
+      </div>
+    </div>
+
+    <div class="bike-card">
+      <img src="66bdcc9de2284-ola-roadster-electric-bike-series-launched-153836760-16x9.avif" alt="TVS Apache" class="bike-img">
+      <div class="bike-details">
+        <h5>TVS Apache</h5>
+        <p class="price">₹850/day</p>
+        <button class="btn btn-outline-success btn-call">Call Now</button>
+        <button class="btn btn-success btn-book">Book Now</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="about-us-section">
+  
+    <div class="about-us row align-items-center">
+      <!-- Left Side: Image -->
+      <div class="col-md-5 text-center">
+        <img src="triumph-t120-1024x640.webp" alt="About Us Image" class="about-img">
+      </div>
+      
+      <!-- Right Side: About Us Text & Button -->
+      <div class="about-content col-md-5">
+        <h4>About Us</h4>
+        <h1>Discover Adventure With Our Self-Drive Dike Rentals!</h1>
+        <p>
+          At ZoomBike, we're more than just a self-drive bike service. We're your ticket to freedom and adventure on two wheels. Our top-quality rentals cater to solo riders, groups, and families, ensuring everyone can explore at their own pace. Discover new destinations, create lasting memories, and embrace the thrill of the open road with ZoomBike as your trusted companion.
+        </p>
+        <button class="btn btn-success btn-lg rounded-pill">Call Now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="why-choose-us-section">
+    <h5 class="small-title">ZoomBike</h5>
+    <h2 class="main-title">Why Choose Us?</h2>
+  
+    <div class="features-container">
+          <!-- Feature 1 (Up) -->
+          <div class="feature-card up">
+            <div class="emoji">👍</div>
+            <h4>Top Quality</h4>
+            <p>We provide the best-maintained bikes for a smooth ride.</p>
+          </div>
+      
+          <!-- Feature 2 (Down) -->
+          <div class="feature-card down">
+            <div class="emoji">🏍️</div>
+            <h4>Wide Selection</h4>
+            <p>Choose from a variety of bikes to suit your adventure.</p>
+          </div>
+      
+          <!-- Feature 3 (Up) -->
+          <div class="feature-card up">
+            <div class="emoji">👥</div>
+            <h4>Trusted by Many</h4>
+            <p>Thousands of happy riders trust our service.</p>
+          </div>
+      
+          <!-- Feature 4 (Down) -->
+          <div class="feature-card down">
+            <div class="emoji">📖</div>
+            <h4>Easy Booking</h4>
+            <p>Quick and hassle-free online booking available.</p>
+          </div>
+        </div>
+   </div>
+  
+   <!-- Stats Container -->
+<div class="stats-container">
+  <div class="row justify-content-center g-4 text-center">
+    
+    <div class="col-md-3 col-6">
+      <div class="stat-card">
+        <div class="stat-emoji">🏍️</div>
+        <div class="stat-text">50</div>
+        <p class="stat-description">+Available Bikes</p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-6">
+      <div class="stat-card">
+        <div class="stat-emoji">👥</div>
+        <div class="stat-text">1000</div>
+        <p class="stat-description">+Happy Clients</p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-6">
+      <div class="stat-card">
+        <div class="stat-emoji">🚗</div>
+        <div class="stat-text">2000</div>
+        <p class="stat-description">+Rentals</p>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-6">
+      <div class="stat-card">
+        <div class="stat-emoji">🏁</div>
+        <div class="stat-text">100000</div>
+        <p class="stat-description">+Miles Covered</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- How to Use Section -->
+<div class="how-to-use-section">
+  <div class="use-container">
+  <div class="row align-items-center justify-content-center">
+    
+    <!-- Left Side: Title, Text, and Image -->
+    <div class="use col-md-5">
+      <h2 class="section-title">HOW TO USE?</h2>
+      <h1 class="section-subtitle">Unlock Adventure with ZoomBike – Your Limitless Journey Awaits!</h1>
+      <img src="PulsarNS125.png" alt="How to Use Image" class="how-to-use-img">
+    </div>
+
+    <!-- Right Side: Steps with Icons -->
+    <div class="use col-md-5">
+      <div class="steps-container">
+        
+        <!-- Step 1 -->
+        <div class="step">
+          <div class="step-icon">🏍️</div>
+          <div class="step-text">
+            <h4>Book your bike and pick it up!</h4>
+            <p>To reserve your bike, just click "Book Now."</p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step">
+          <div class="step-icon">📅</div>
+          <div class="step-text">
+            <h4>Plan your ride with ease!</h4>
+            <p>Choose your preferred rental period .</p>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step">
+          <div class="step-icon">🚴‍♂️</div>
+          <div class="step-text">
+            <h4>Enjoy the ride and return safely!</h4>
+            <p>Experience the open road and return the bike</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- First Section: Booking CTA -->
+<div class="booking-section">
+  <div class="booking-content">
+    <h2>Book Your Bike - It's Simple And Affordable</h2>
+    <p>Experience the simplicity and affordability of booking your bike with us! Explore new adventures with ease. Call now to book!</p>
+  </div>
+  <div class="booking-action">
+    <h3>📞 +91 98765 43210</h3>
+    <button class="btn btn-success btn-lg rounded-pill">Book Your Bike</button>
+  </div>
+</div>
+
+<!-- Second Section: Footer Info -->
+<div class="footer-section">
+  <div class="footer-content">
+    <p>
+      ZoomBike offers top-quality rentals for solo riders, groups, and families, providing freedom and adventure to explore new destinations at leisure.
+    </p>
+    <p>
+      📍 Opp North East Public School, Navadaya Nagar, Bye Lane 7, Patharkuchi Road, Basistha Charali
+    </p>
+  </div>
+  <div class="footer-links">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Bikes</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  <div class="footer-contact">
+    <h4>Contact Us</h4>
+    <p>📞 +91 98765 43210</p>
+    <p>✉️ info@zoombike.com</p>
+  </div>
+</div>
+<div class="footer-bottom">
+  <!-- Copyright Section -->
+  <div class="copyright">
+    © Copyright 2025 Zoombike All Rights Reserved. Designed by SOFTNUE.
+  </div>
+  
+  <!-- Social Media Section -->
+  <div class="social-media">
+    <a href="#"><i class="fab fa-facebook-f"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+  </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
